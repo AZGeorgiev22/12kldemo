@@ -3,7 +3,7 @@
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Оценки | Student Assessment</title><link rel="stylesheet" href="/css/style.css"></head>
 <body>
-<header><div class="brand">🎓 <span>Student Assessment</span></div><button id="logout" class="hidden">Изход</button></header>
+<header><div class="brand">🎓 <span>Student Assessment</span></div><nav><a id="reportsLink" href="#reports">Отчети</a><a id="registrationLink" class="hidden" href="#userRegistrationReport">Регистрации</a><button id="logout" class="hidden">Изход</button></nav></header>
 <main>
   <section id="login" class="card login-card"><h1>Система за оценяване</h1><p class="muted">Вход за преподаватели и студенти</p>
     <form id="loginForm"><input id="username" placeholder="Потребителско име" required><input id="password" type="password" placeholder="Парола" required><button>Вход</button></form>
@@ -12,6 +12,38 @@
   <section id="app" class="hidden"><div class="welcome"><div><h1 id="welcome"></h1><p class="muted">Преглед на учебния напредък</p></div><span id="role" class="badge"></span></div>
     <div class="grid"><div class="card"><h2>Моите оценки</h2><div id="grades"></div></div><div class="card"><h2>Предстоящи задачи</h2><div id="assignments"></div></div></div>
     <div class="card"><h2>Дисциплини</h2><div id="courses" class="course-grid"></div></div>
+    <div id="reports" class="card"><h2>Отчети</h2>
+      <p class="muted">Обобщение на евентите и събраните средства за избрания период.</p>
+      <form id="reportForm" class="report-form">
+        <label>Към дата <input id="reportDate" type="date"></label>
+        <label>Период <select id="reportMonths"><option value="1">1 месец</option><option value="6">6 месеца</option><option value="12">12 месеца</option></select></label>
+        <button>Покажи отчет</button>
+        <button id="downloadReport" type="button">Изтегли PDF</button>
+      </form>
+      <p id="reportError" class="error"></p><div id="reportResults"></div>
+    </div>
+    <div id="userRegistrationReport" class="card hidden"><div class="section-heading"><div><h2>Регистрации</h2><p class="muted">Потребители, регистрирани днес и активност назад във времето</p></div><span class="badge">LIVE INSIGHTS</span></div><div id="registrationCards" class="stats-grid"></div><div class="registration-layout"><div><h3>Последни регистрации днес</h3><div id="todayRegistrations"></div></div><div><h3>Месечна активност</h3><div id="registrationChart" class="registration-chart"></div></div></div><p id="registrationInsight" class="insight"></p></div>
+    <div id="userManagement" class="card hidden"><h2>Управление на потребители</h2>
+      <form id="userSearchForm" class="report-form">
+        <input id="userSearch" placeholder="Търсене по име, username, email, телефон или роля">
+        <select id="userSort"><option value="fullName">Име</option><option value="username">Username</option><option value="email">Email</option><option value="phone">Телефон</option><option value="role">Роля</option><option value="active">Статус</option></select>
+        <select id="userDirection"><option value="asc">Възходящо</option><option value="desc">Низходящо</option></select>
+        <button>Търси</button>
+      </form>
+      <p id="userSearchError" class="error"></p>
+      <div id="userPagination" class="report-form"></div>
+      <div id="usersList"></div>
+      <form id="userForm" class="report-form">
+        <input id="newUsername" placeholder="Потребителско име" required>
+        <input id="newPassword" type="password" placeholder="Парола" required>
+        <input id="newFullName" placeholder="Име" required>
+        <input id="newEmail" type="email" placeholder="Email">
+        <input id="newPhone" placeholder="Телефон">
+        <select id="newRole"><option value="ADMIN">ADMIN</option><option value="VET">VET</option><option value="RECEPTION">RECEPTION</option></select>
+        <button>Създай потребител</button>
+      </form>
+      <p id="userError" class="error"></p>
+    </div>
   </section>
 </main><script src="/js/app.js"></script>
 </body></html>

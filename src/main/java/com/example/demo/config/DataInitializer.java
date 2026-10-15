@@ -14,7 +14,10 @@ public class DataInitializer {
     CommandLineRunner seed(UserRepository users, CourseRepository courses, GradeRepository grades,
                            AssignmentRepository assignments, PasswordEncoder encoder) {
         return args -> {
-            if (users.count() > 0) return;
+            if (users.findByUsername("admin").isEmpty()) {
+                users.save(new User("admin", encoder.encode("admin123"), "System Administrator", Role.ADMIN));
+            }
+            if (users.count() > 1) return;
             User teacher = users.save(new User("teacher", encoder.encode("teacher123"), "Мария Иванова", Role.TEACHER));
             User student = users.save(new User("student", encoder.encode("student123"), "Аспарух Георгиев", Role.STUDENT));
             Course java = courses.save(new Course("Java програмиране", "Обектно-ориентирано програмиране и Spring Boot", teacher));

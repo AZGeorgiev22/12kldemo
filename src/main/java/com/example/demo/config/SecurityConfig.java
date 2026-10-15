@@ -16,7 +16,7 @@ public class SecurityConfig {
     UserDetailsService userDetailsService(UserRepository users) {
         return username -> users.findByUsername(username)
             .map(u -> User.withUsername(u.getUsername()).password(u.getPassword())
-                .roles(u.getRole().name()).build())
+                .roles(u.getRole().name()).disabled(!u.isActive()).build())
             .orElseThrow(() -> new UsernameNotFoundException(username));
     }
     @Bean PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }

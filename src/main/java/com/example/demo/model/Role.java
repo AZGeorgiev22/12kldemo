@@ -1,5 +1,5 @@
 package com.example.demo.model;
 
 public enum Role {
-    TEACHER, STUDENT
+    ADMIN, VET, RECEPTION, TEACHER, STUDENT
 }
