@@ -16,9 +16,9 @@ public class User {
     private String fullName;
     private String email;
     private String phone;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean active = true;
-    @Enumerated(EnumType.STRING) @Column(nullable = false)
+    @Enumerated(EnumType.STRING) @Column(nullable = false, columnDefinition = "varchar(20)")
     private Role role;
     @Column
     private LocalDateTime createdAt;
